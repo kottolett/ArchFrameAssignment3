@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="header :: header"></head>
+<body>
+<div th:replace="header :: navbar"></div>
+
+<div class="container">
+    <div class="row my-5">
+        <div class="col-sm-10 mx-auto">
+            <h2 class="text-dark text-center font-weight-bold">Films</h2>
+            <br><br>
+            <table class="table">
+                <tr>
+                    <th scope="col">Title</th>
+                    <th scope="col">Cinema</th>
+                    <th scope="col">Buy</th>
+                    <th scope="col" th:if="${user.role == 'ADMIN'}">Delete</th>
+                </tr>
+                <tbody>
+                <tr th:each="film : ${films}">
+                    <td th:text="${film.title}"></td>
+                    <td th:text="${film.cinema}"></td>
+                    <td>
+                        <a class="btn btn-warning" th:href="@{/buyTicket/}+${film.id}">Buy</a>
+                    </td>
+                    <td th:if="${user.role == 'ADMIN'}">
+                        <a class="btn btn-warning" th:href="@{/deleteFilm/}+${film.id}">Delete</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <div th:if="${user.role == 'ADMIN'}">
+                <a th:href="@{/addFilm}" class="btn btn-outline-info" role="button">Add film</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="header :: header"></head>
+<body>
+<div th:replace="header :: navbar"></div>
+
+<div class="container" th:if="${user.role == 'ADMIN'}">
+    <div class="row my-5">
+        <div class="col-sm-6 mx-auto">
+            <h2 class="text-dark text-center font-weight-bold">Add Film</h2>
+            <br><br>
+            <form th:action="@{/saveFilm}" method="POST" th:object="${film}">
+                <div class="form-group">
+                    <input type="hidden" class="form-control" th:value="${film.id}" name="id">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" th:value="${film.title}" placeholder="Title" name="title" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" th:value="${film.cinema}" placeholder="Cinema" name="cinema" required>
+                </div>
+                <button class="btn btn-outline-info">Save</button>
+                <a href="/home" type="button" class="btn btn-outline-danger float-right">Cancel</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
